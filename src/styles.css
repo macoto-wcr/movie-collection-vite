@@ -1,0 +1,423 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #16a34a;
+      --green-dark: #15803d;
+      --ink: #14231a;
+      --muted: #6b8a76;
+    }
+
+    html { background: #eef4ee; }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      background: transparent;
+      color: var(--ink);
+      font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ===== 背景：一层固定的模糊彩色光斑 ===== */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -6%;
+      z-index: -2;
+      background:
+        radial-gradient(54% 60% at 6% 2%,   rgba(142, 211, 164, .92) 0%, rgba(142, 211, 164, 0) 68%),
+        radial-gradient(50% 56% at 94% 4%,  rgba(127, 202, 192, .88) 0%, rgba(127, 202, 192, 0) 68%),
+        radial-gradient(58% 62% at 98% 80%, rgba(166, 206, 232, .88) 0%, rgba(166, 206, 232, 0) 70%),
+        radial-gradient(56% 62% at 2% 94%,  rgba(239, 217, 164, .92) 0%, rgba(239, 217, 164, 0) 70%),
+        radial-gradient(36% 40% at 50% 44%, rgba(255, 255, 255, .55) 0%, rgba(255, 255, 255, 0) 72%),
+        linear-gradient(155deg, #dcece1 0%, #f4f8f1 50%, #dcecea 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ===== 顶部导航 ===== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      height: 64px;
+      padding: 0 28px;
+      background: rgba(255, 255, 255, .82);
+      border-bottom: 1px solid rgba(255, 255, 255, .6);
+    }
+
+    .logo { font-size: 17px; font-weight: 700; letter-spacing: .3px; }
+
+    .nav-links { display: flex; gap: 6px; }
+
+    .nav-links a {
+      padding: 8px 14px;
+      font-size: 14px;
+      color: var(--muted);
+      border-radius: 10px;
+      transition: .18s;
+    }
+
+    .nav-links a:hover { color: var(--ink); background: #eef7f1; }
+
+    .nav-links a.active { color: #fff; background: var(--green); }
+
+    /* ===== 页面容器 ===== */
+    .container { max-width: 940px; margin: 0 auto; padding: 34px 20px 80px; }
+
+    /* ===== 首页主框 ===== */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 20px;
+      padding: 48px 44px 0;
+      margin-bottom: 46px;
+      border-radius: 26px;
+      background: radial-gradient(130% 150% at 0% 0%, #1d5439 0%, #123524 48%, #0a1f17 100%);
+      color: #eaf7ef;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(15, 60, 40, .22);
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      line-height: 1.22;
+      letter-spacing: .5px;
+      margin-bottom: 12px;
+    }
+
+    .hero-text {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      padding-top: 34px;
+    }
+
+    .hero-text .btn {
+      align-self: flex-start;
+      margin: auto 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 26px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #0b2c1e;
+      background: #7bf1a8;
+      border-radius: 14px;
+      transition: .18s;
+    }
+
+    .btn:hover { background: #9cf7c0; transform: translateY(-1px); }
+
+    /* 右侧三张海报叠放 */
+    .hero-posters {
+      position: relative;
+      height: 300px;
+      min-width: 300px;
+    }
+
+    .hero-posters img {
+      position: absolute;
+      width: 150px;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 12px;
+      box-shadow: 0 22px 44px rgba(0, 0, 0, .5);
+    }
+
+    .hero-posters img:nth-child(1) { left: 0;    top: 44px; transform: rotate(-9deg); }
+    .hero-posters img:nth-child(2) { left: 94px; top: 8px;  transform: rotate(-1deg); z-index: 2; }
+    .hero-posters img:nth-child(3) { left: 188px; top: 44px; transform: rotate(9deg); }
+
+    /* ===== 区块标题 ===== */
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-title { font-size: 20px; }
+
+    /* ===== 收藏夹：简化卡片 ===== */
+    .fav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+    }
+
+    .fav-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 14px 10px 10px;
+      background: rgba(255, 255, 255, .86);
+      border: 1px solid rgba(255, 255, 255, .85);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(21, 60, 40, .06);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+
+    .fav-card:hover {
+      border-color: #bfe6cd;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(21, 128, 61, .10);
+    }
+
+    .fav-poster {
+      flex: none;
+      width: 58px;
+      height: 84px;
+      object-fit: cover;
+      border-radius: 9px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+    }
+
+    .fav-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .fav-title { font-size: 15px; font-weight: 700; }
+    .fav-meta { font-size: 12.5px; color: var(--muted); }
+
+    /* ===== 页面标题 ===== */
+    .page-title { font-size: 28px; margin-bottom: 6px; }
+    .list-title { margin-bottom: 26px; }
+    .page-desc { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+
+    /* ===== 搜索框 ===== */
+    .search {
+      display: block;
+      width: 100%;
+      height: 46px;
+      padding: 0 16px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .92);
+      border: 2px solid rgba(255, 255, 255, .9);
+      border-radius: 13px;
+      outline: none;
+      transition: .2s;
+    }
+
+    .search:focus { border-color: #22c55e; box-shadow: 0 0 0 4px rgba(34, 197, 94, .12); }
+
+    .count { font-size: 13px; color: #8aa89a; margin-bottom: 16px; }
+
+    /* ===== 电影列表：movie-card.html 的卡片效果 ===== */
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+      gap: 16px;
+    }
+
+    .movie-card {
+      display: flex;
+      flex-direction: column;
+      padding: 14px 14px 16px;
+      background: rgba(255, 255, 255, .88);
+      border: 1px solid rgba(255, 255, 255, .85);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(21, 60, 40, .08);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .movie-card:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+      transform: translateY(-6px);
+    }
+
+    .movie-poster {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 9px;
+    }
+
+    .movie-card h2 {
+      margin: 12px 0 4px;
+      text-align: center;
+      font-size: 17px;
+    }
+
+    .movie-meta {
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 12.5px;
+      color: #8aa89a;
+    }
+
+    .movie-synopsis {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-size: 13px;
+      line-height: 1.8;
+      color: #555;
+      text-align: justify;
+    }
+
+    .empty {
+      padding: 54px 0;
+      text-align: center;
+      font-size: 14px;
+      color: #9ab8a8;
+    }
+
+    /* ===== 详情页 ===== */
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 20px;
+      padding: 8px 14px;
+      font-size: 13.5px;
+      color: #4b7a5f;
+      background: rgba(255, 255, 255, .88);
+      border: 1px solid rgba(255, 255, 255, .85);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: .18s;
+    }
+
+    .back:hover { border-color: #a9dfbd; color: var(--green-dark); }
+
+    .detail-card {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 30px;
+      padding: 30px;
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid rgba(255, 255, 255, .85);
+      border-radius: 22px;
+      box-shadow: 0 18px 50px rgba(21, 60, 40, .1);
+    }
+
+    .detail-poster {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, .22);
+    }
+
+    .detail-top {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .detail-top h1 { font-size: 30px; }
+
+    .fav-badge {
+      padding: 4px 10px;
+      font-size: 12px;
+      color: #b45309;
+      background: #fef3c7;
+      border-radius: 999px;
+    }
+
+    .fav-btn {
+      margin-top: 18px;
+      padding: 9px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #15803d;
+      background: #eef9f2;
+      border: 1px solid #bfe6cd;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: .18s;
+    }
+
+    .fav-btn:hover { background: #ddf3e6; }
+
+    .fav-btn.on {
+      color: #b45309;
+      background: #fef3c7;
+      border-color: #f0d08a;
+    }
+
+    .en {
+      margin-bottom: 16px;
+      font-size: 13px;
+      letter-spacing: .4px;
+      color: #9ab8a8;
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .chip {
+      padding: 5px 11px;
+      font-size: 12.5px;
+      color: #3f6f52;
+      background: #eef9f2;
+      border: 1px solid #d7efdf;
+      border-radius: 999px;
+    }
+
+    .detail-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 22px 0;
+    }
+
+    .detail-rows p { font-size: 14px; color: #3c5647; }
+    .detail-rows span { display: inline-block; width: 52px; color: #8aa89a; }
+
+    .synopsis {
+      font-size: 14.5px;
+      line-height: 1.9;
+      color: #3c5647;
+      text-align: justify;
+    }
+
+    footer {
+      padding: 24px;
+      text-align: center;
+      font-size: 12.5px;
+      color: #a8c0b3;
+    }
+
+    @media (max-width: 760px) {
+      .nav { padding: 0 16px; }
+      .hero { grid-template-columns: 1fr; padding: 34px 26px; }
+      .hero h1 { font-size: 30px; }
+      .hero-text { padding-top: 0; }
+
+      /* 手机上不再隐藏海报，缩成一排放在按钮下方 */
+      .hero-posters {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        height: 200px;
+        margin-top: 18px;
+      }
+
+      .hero-posters img {
+        width: clamp(78px, 25vw, 104px);
+        border-radius: 9px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, .45);
+      }
+
+      .hero-posters img:nth-child(1) { left: 50%; top: 26px; transform: translateX(-140%) rotate(-10deg); }
+      .hero-posters img:nth-child(2) { left: 50%; top: 0;    transform: translateX(-50%) rotate(-1deg); z-index: 2; }
+      .hero-posters img:nth-child(3) { left: 50%; top: 26px; transform: translateX(40%) rotate(10deg); }
+
+      .detail-card { grid-template-columns: 1fr; padding: 22px; }
+      .detail-poster { max-width: 230px; }
+      .detail-top h1 { font-size: 24px; }
+    }
