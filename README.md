@@ -3,9 +3,15 @@
 把最初的单文件 React 应用迁移到 **Vite + React Router 7** 的版本。迁移过程中记录遇到的问题和解决思路。
 
 - 单文件原版：[movie-collection](https://github.com/macoto-wcr/movie-collection)
-- 线上预览（单文件版）：<https://macoto-wcr.github.io/movie-collection/>
+- 单文件版线上预览：<https://macoto-wcr.github.io/movie-collection/>
 
-> 当前状态：迁移已完成，`lint` 与 `build` 均通过，待部署。
+> 当前状态：迁移已完成，`lint` 与 `build` 均通过，已部署上线。
+
+## 线上预览
+
+<https://movie-collection-vite.vercel.app/>
+
+> 推送 `main` 后由 Vercel 自动构建部署。`*.vercel.app` 在国内需代理访问。
 
 ## 技术栈
 
@@ -57,7 +63,7 @@ src/
 - [x] MovieDetail、NotFound
 - [x] App 路由组装
 - [x] ESLint 与 `npm run build` 通过
-- [ ] 部署上线
+- [x] 部署上线
 
 ## 踩坑记录：中文输入法下输入重复
 
@@ -165,8 +171,8 @@ return (
 
 ## 后续计划
 
-- 部署上线
-- 后续可迁移到 TypeScript
+- 迁移到 TypeScript
+- 视需要增加 GitHub Pages 或自定义域名，方便国内访问
 
 ## 说明
 
