@@ -1,7 +1,12 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { MOVIES } from '../data/movies.js'
+import { MOVIES } from '../data/movies'
 
-export default function MovieDetail({ favorites, toggleFavorite }) {
+interface MovieDetailProps {
+    favorites: number[]
+    toggleFavorite: (id: number) => void
+}
+
+export default function MovieDetail({ favorites, toggleFavorite }:MovieDetailProps) {
     const { id } = useParams();
     const navigate = useNavigate()
 

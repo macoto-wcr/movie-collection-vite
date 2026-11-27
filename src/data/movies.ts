@@ -1,3 +1,4 @@
+import type { Movie } from '../types'
 import p771490367 from '../assets/p771490367.webp'
 import p2917313557 from '../assets/p2917313557.webp'
 import p2555762374 from '../assets/p2555762374.webp'
@@ -5,7 +6,7 @@ import p2629400933 from '../assets/p2629400933.webp'
 import p2884341294 from '../assets/p2884341294.webp'
 import p510861873 from '../assets/p510861873.webp'
 
-export const MOVIES = [
+export const MOVIES:Movie[] = [
       {
         id: 1,
         title: "生活多美好",

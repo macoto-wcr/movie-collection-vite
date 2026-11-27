@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { MOVIES } from '../data/movies.js'
+import { MOVIES } from '../data/movies'
 
 export default function MovieList() {
   const location = useLocation()
@@ -33,7 +33,7 @@ export default function MovieList() {
   )
 
   // 只有提交（回车）时才把搜索词写进网址
-  function handleSubmit(e) {
+  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault()
     navigate(q ? '/movies?q=' + encodeURIComponent(q) : '/movies', {
       replace: true,
